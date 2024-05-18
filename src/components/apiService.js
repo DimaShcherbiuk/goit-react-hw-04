@@ -13,7 +13,6 @@ export const getPhotos = async (query, page) => {
       },
     });
 
-    console.log(response.data);
     return response.data.results;
   } catch (error) {
     console.error("Error fetching articles:", error);

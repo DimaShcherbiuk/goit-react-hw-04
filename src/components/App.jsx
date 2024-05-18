@@ -1,7 +1,5 @@
-import { useState } from "react";
-
 // import css from "./App.module.css";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import SearchBar from "./SearchBar/SearchBar";
 import { getPhotos } from "./apiService";
 import LoadMoreBtm from "./LoadMoreBtm/LoadMoreBtm";
@@ -10,6 +8,7 @@ import ImageModal from "./ImageModal/ImageModal";
 import ImageGallery from "./ImageGallery/ImageGallery";
 import ErrorMessage from "./ErrorMessage/ErrorMessage";
 import { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 function App() {
   const [query, setQuery] = useState("");
@@ -17,25 +16,30 @@ function App() {
   const [images, setImages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  // const [isEmpty, setIsEmpty] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
   //modal
   const [modalUrl, setModalUrl] = useState("");
   const [modalAlt, setModalAlt] = useState("");
   const [showModal, setShowModal] = useState(false);
+  const [isEmpty, setIsEmpty] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
         const data = await getPhotos(query, page);
+        if (data.length === 0) {
+          setIsEmpty(true);
+        } else {
+          setIsEmpty(false);
+        }
         if (page === 1) {
           setImages(data);
         } else {
           setImages((prevArticles) => [...prevArticles, ...data]);
         }
-        setIsVisible(page < Math.ceil(data.results.length / data.total_pages));
+        setIsVisible(data.length === 10);
       } catch (error) {
         setError(true);
       } finally {
@@ -53,8 +57,8 @@ function App() {
     setImages([]);
     setPage(1);
     setError(null);
-    // setIsEmpty(false);
     setIsVisible(false);
+    setIsEmpty(false);
   };
 
   const onLoadMoreBtn = () => {
@@ -79,7 +83,7 @@ function App() {
       <SearchBar onSubmit={onHandleSubmit} />
       {isLoading && <Loader />}
       {error && <ErrorMessage />}
-
+      {isEmpty && <p>{toast.error("No results found for your query.")}</p>}
       {images.length > 0 && (
         <ImageGallery images={images} openModal={openModal} />
       )}

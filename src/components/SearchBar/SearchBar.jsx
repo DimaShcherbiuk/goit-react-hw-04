@@ -1,13 +1,13 @@
 import toast from "react-hot-toast";
 import { useState } from "react";
-// import css from "./SearchBar.module.css";
+import css from "./SearchBar.module.css";
+import { FiSearch } from "react-icons/fi";
 
 const SearchForm = ({ onSubmit }) => {
   const [query, setQuery] = useState("");
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    const form = evt.target;
 
     if (query.trim() === "") {
       toast.error("Please enter a search term!");
@@ -15,7 +15,7 @@ const SearchForm = ({ onSubmit }) => {
     }
 
     onSubmit(query);
-    form.reset();
+    setQuery("");
   };
 
   const handleChange = (evt) => {
@@ -23,8 +23,8 @@ const SearchForm = ({ onSubmit }) => {
   };
 
   return (
-    <header>
-      <form onSubmit={handleSubmit}>
+    <header className={css.header}>
+      <form onSubmit={handleSubmit} className={css.form}>
         <input
           name="topic"
           type="text"
@@ -33,8 +33,11 @@ const SearchForm = ({ onSubmit }) => {
           placeholder="Search images and photos"
           value={query}
           onChange={handleChange}
+          className={css.input}
         />
-        <button type="submit">Search</button>
+        <button className={css.button} type="submit">
+          <FiSearch size="20px" />
+        </button>
       </form>
     </header>
   );

@@ -1,4 +1,4 @@
-// import css from "./ImageCard.module.css";
+import css from "./ImageCard.module.css";
 
 const ImageCard = ({ imgUrl, imgDescr, onClick }) => {
   const handleClick = () => {
@@ -6,7 +6,7 @@ const ImageCard = ({ imgUrl, imgDescr, onClick }) => {
   };
 
   return (
-    <div onClick={handleClick}>
+    <div className={css.image} onClick={handleClick}>
       <img src={imgUrl} alt={imgDescr} />
     </div>
   );
