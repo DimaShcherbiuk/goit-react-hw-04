@@ -14,7 +14,6 @@ const customStyles = {
     border: "none",
     background: "none",
     overflow: "visible",
-    // padding: 30,
   },
 };
 
