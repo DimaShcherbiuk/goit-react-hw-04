@@ -27,9 +27,6 @@ const ImageModal = ({ modalIsOpen, closeModal, modalUrl, modalAlt }) => {
       style={customStyles}
       contentLabel="Image Modal"
     >
-      {/* <button onClick={closeModal} className="close-btn">
-        &times;
-      </button> */}
       <img src={modalUrl} alt={modalAlt} />
     </Modal>
   );

@@ -1,13 +1,9 @@
-import css from "./LoadMoreBtm.module.css";
+// import css from "./LoadMoreBtm.module.css";
 
 const LoadMoreBtn = ({ children, onClick, disabled }) => {
   return (
-    <div className={css.center}>
-      <button
-        onClick={onClick}
-        disabled={disabled}
-        className={css["load-more-btn"]}
-      >
+    <div>
+      <button onClick={onClick} disabled={disabled}>
         {children}
       </button>
     </div>

@@ -1,16 +1,11 @@
 import ImageCard from "./ImageCard/ImageCard";
-import css from "./ImageGallery.module.css";
+// import css from "./ImageGallery.module.css";
 
 const ImageGallery = ({ images, openModal }) => (
-  <ul className={css["image-gallery"]}>
+  <ul>
     {images.map(({ id, urls, slug }) => (
       <li key={id}>
-        <ImageCard
-          className={css["image-card"]}
-          imgUrl={urls.small}
-          imgDescr={slug}
-          onClick={openModal}
-        />
+        <ImageCard imgUrl={urls.small} imgDescr={slug} onClick={openModal} />
       </li>
     ))}
   </ul>
