@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import SearchBar from "./SearchBar/SearchBar";
 import { getPhotos } from "./apiService";
-import LoadMoreBtm from "./LoadMoreBtm/LoadMoreBtm";
+import LoadMoreBtn from "./LoadMoreBtn/LoadMoreBtn";
 import Loader from "./Loader/Loader";
 import ImageModal from "./ImageModal/ImageModal";
 import ImageGallery from "./ImageGallery/ImageGallery";
@@ -88,9 +88,9 @@ function App() {
       )}
 
       {isVisible && (
-        <LoadMoreBtm onClick={onLoadMoreBtn} disabled={isLoading}>
+        <LoadMoreBtn onClick={onLoadMoreBtn} disabled={isLoading}>
           {isLoading ? "Loading..." : "Load more"}
-        </LoadMoreBtm>
+        </LoadMoreBtn>
       )}
 
       <ImageModal

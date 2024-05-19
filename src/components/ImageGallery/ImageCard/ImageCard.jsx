@@ -1,13 +1,15 @@
 import css from "./ImageCard.module.css";
 
 const ImageCard = ({ urls, imgDescr, openModal }) => {
-  const handleClick = () => {
-    openModal(urls.regular);
-  };
-
   return (
-    <div className={css.image} onClick={handleClick}>
-      <img src={urls.small} alt={imgDescr} />
+    <div className={css.image}>
+      <img
+        src={urls.small}
+        alt={imgDescr}
+        onClick={() => {
+          openModal(urls.regular);
+        }}
+      />
     </div>
   );
 };
